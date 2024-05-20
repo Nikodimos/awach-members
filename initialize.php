@@ -45,10 +45,12 @@ $createAuditTrailTable = "
 CREATE TABLE IF NOT EXISTS audit_trail (
     audit_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
+    target_user_id INT,
     action VARCHAR(50) NOT NULL,
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     details TEXT,
-    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (target_user_id) REFERENCES users(user_id) ON DELETE CASCADE
 )";
 
 // Execute table creation

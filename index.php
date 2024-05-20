@@ -1,5 +1,6 @@
 <?php
 require './config/database.php';
+require './config/check_session.php';
 
 try {
     // Check if the database exists by trying to fetch data from the 'users' table

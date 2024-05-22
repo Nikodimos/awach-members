@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once './config/session_check.php';
 require './config/database.php';
 
 // Check if user is logged in

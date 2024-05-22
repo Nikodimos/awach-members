@@ -1,23 +1,33 @@
 <?php
-require './config/database.php';
-require './config/check_session.php';
+require_once './config/database.php';
+// Function to check if tables exist
+function tablesExist($pdo) {
+    try {
+        $result = $pdo->query("SHOW TABLES LIKE 'users'");
+        return $result && $result->rowCount() > 0;
+    } catch (PDOException $e) {
+        return false;
+    }
+}
 
 try {
-    // Check if the database exists by trying to fetch data from the 'users' table
-    $result = $pdo->query("SELECT 1 FROM users LIMIT 1");
+    // Check if database connection is successful
+    $pdo->query('SELECT 1');
 
-    // If the query runs successfully, the tables exist
-    header("Location: login.php"); // Redirect to login or the main application page
+    // Check if tables exist
+    if (!tablesExist($pdo)) {
+        header("Location: initialize.php");
+        exit;
+    }
+
+    // Include session check
+    require './config/session_check.php';
+
+    // If user is logged in, redirect to dashboard
+    header("Location: dashboard.php");
     exit;
 } catch (PDOException $e) {
-    // Check if the error is due to a missing table
-    if ($e->getCode() == '42S02') { // MySQL error code for "table does not exist"
-        header("Location: initialize.php"); // Redirect to initialization script
-        exit;
-    } elseif ($e->getCode() == '1049') { // MySQL error code for "unknown database"
-        echo "The database 'sacco_db' does not exist. Please create the database.";
-    } else {
-        echo "An error occurred: " . $e->getMessage();
-    }
+    // Handle database connection error
+    echo "<p>Database error: " . htmlspecialchars($e->getMessage()) . "</p>";
 }
 ?>

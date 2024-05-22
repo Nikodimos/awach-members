@@ -30,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['branch_id'] = $user['branch_id'];
                 $_SESSION['status'] = $user['status'];
                 $_SESSION['user_role'] = $user['role_id'];
+                $_SESSION['LAST_ACTIVITY'] = time(); // Initialize session timeout
                 header("Location: dashboard.php");
                 exit;
             } else {

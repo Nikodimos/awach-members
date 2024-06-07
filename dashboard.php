@@ -33,6 +33,12 @@ echo "Welcome, " . htmlspecialchars($full_name) . " (" . htmlspecialchars($usern
             <li>Status: <?php echo htmlspecialchars($status); ?></li>
             <li>User Role: <?php echo htmlspecialchars($user_role); ?></li>
             <li><a href="./user.php">Users</a></li>
+            <li><a href="./Region.php">Region</a></li>
+            <li><a href="./Zone.php">Zone</a></li>
+            <li><a href="./Subcity.php">Subcity</a></li>
+            <li><a href="./Woreda.php">Woreda</a></li>
+            <li><a href="./Kebele.php">Kebele</a></li>
+            <li><a href="./user.php">Users</a></li>
         </ul>
         <a href="logout.php" class="btn btn-primary">Logout</a>
     </div>

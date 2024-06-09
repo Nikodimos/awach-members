@@ -1,7 +1,7 @@
 <?php
 // database.php - Database connection
 $host = 'localhost';
-$db = 'sacco_db';
+$db = 'awach_members';
 $user = 'root';
 $pass = '';
 $charset = 'utf8mb4';

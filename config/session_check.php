@@ -3,7 +3,7 @@ session_start();
 
 // Function to handle session timeout
 function checkSessionTimeout() {
-    $timeout_duration = 300; // 5 minutes
+    $timeout_duration = 150000; // 5 minutes 300
     if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
         session_unset();
         session_destroy();

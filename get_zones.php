@@ -4,11 +4,12 @@ require './config/database.php';
 
 if (isset($_POST['region_id'])) {
     $region_id = $_POST['region_id'];
-    $stmt = $pdo->prepare("SELECT * FROM Zone WHERE region_id = ?");
+    $stmt = $pdo->prepare('SELECT zone_id, zone_name FROM Zone WHERE region_id = ?');
     $stmt->execute([$region_id]);
-    echo '<option value="">Select a Zone</option>';
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        echo '<option value="' . htmlspecialchars($row['zone_id']) . '">' . htmlspecialchars($row['zone_name']) . '</option>';
+    $zones = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo '<option value="">Select Zone</option>';
+    foreach ($zones as $zone) {
+        echo '<option value="' . $zone['zone_id'] . '">' . htmlspecialchars($zone['zone_name'], ENT_QUOTES, 'UTF-8') . '</option>';
     }
 }
 ?>
